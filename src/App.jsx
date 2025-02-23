@@ -11,6 +11,11 @@ function App() {
   const MAX_ITEMS = 5
   const MIN_ITEMS = 1
 
+  // Codigo para guardar automaticamente el carrito en el localStorage
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [ cart])
+
 
   // Funcion para agregar guitarras al carrito
   function addToCart(item) {
@@ -25,7 +30,6 @@ function App() {
       item.quantity = 1
       setCart([...cart, item])
     }
-     
   }
 
   // Funcion para remover guitarras del carrito. 
@@ -65,6 +69,7 @@ function App() {
   function clearCart() {
     setCart([])
   }
+
 
   return (
     <>
