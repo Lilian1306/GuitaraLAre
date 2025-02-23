@@ -1,4 +1,4 @@
-name: MagicShop CI/CD
+name: GuitarLA CI/CD
 
 on:
   push:
