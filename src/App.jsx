@@ -6,15 +6,20 @@ import { db } from "./data/db"
 
 function App() {
 
+  const initialCart = (() => {
+    const localStorageCart = localStorage.getItem("cart")
+    return localStorageCart ? JSON.parse(localStorageCart) : []
+  })
+
   const [ data, setData] = useState(db) 
-  const [cart, setCart ] = useState([]) 
+  const [cart, setCart ] = useState([initialCart]) 
   const MAX_ITEMS = 5
   const MIN_ITEMS = 1
 
   // Codigo para guardar automaticamente el carrito en el localStorage
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
-  }, [ cart])
+  }, [cart])
 
 
   // Funcion para agregar guitarras al carrito
