@@ -8,6 +8,8 @@ function App() {
 
   const [ data, setData] = useState(db) 
   const [cart, setCart ] = useState([]) 
+  const MAX_ITEMS = 5
+  const MIN_ITEMS = 0
 
 
   // Funcion para agregar guitarras al carrito
@@ -30,11 +32,41 @@ function App() {
     setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))
   }
 
+  // Funcion para incrementar el producto en el carrito
+  function increaseQuantity (id){
+    const updatedCart = cart.map(item => {
+      if(item.id === id && item.quantity < MAX_ITEMS ) {
+        return {
+          ...item,
+          quantity: item.quantity + 1
+        }
+      }
+      return item
+    })
+    setCart(updatedCart)
+  }
+
+  // Funcion para decrementar el producto en el carrito 
+  function decrementQuantity (id) {
+    const updatedCart = cart.map(item => {
+      if(item.id === id && item.quantity > MIN_ITEMS){
+        return {
+          ...item,
+          quantity: item.quantity - 1
+        }
+      }
+      return item
+    })
+    setCart(updatedCart)
+  }
+
   return (
     <>
     <Header
         cart={cart}
         removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decrementQuantity={decrementQuantity}
     />
 
     <main className="container-xl mt-5">
